@@ -9,6 +9,7 @@ class AddItemForm extends Component {
         super(props);
 
         this.state = {
+            id: '',
             itemNumber: '',
             variantNumber: '',
             basePrice: 0,
@@ -41,6 +42,10 @@ class AddItemForm extends Component {
     render() {
         return (
             <form className='row jumbotron' onSubmit={this.onFormSubmit} >
+                <div className="form-group col-md-3">
+                    <label>ID</label>
+                    <input id="id" value={this.state.id} onChange={this.onInputChange} className="form-control" />
+                </div>
                 <div className="form-group col-md-3">
                     <label>Item Number</label>
                     <input id="itemNumber" value={this.state.itemNumber} onChange={this.onInputChange} className="form-control" />
@@ -76,7 +81,7 @@ class AddItemForm extends Component {
                     />
                 </div>
 
-                <button type="submit" className="btn btn-success col-md-3">Add</button>
+                <button type="submit" className="btn btn-success col-md-3">Save</button>
 
             </form>
         );

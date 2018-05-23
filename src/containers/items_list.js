@@ -12,9 +12,10 @@ class ItemsList extends Component {
         return (
             <div>
                 <AddItemForm />
-                <table className="table">
+                <table className="table table-hover">
                     <thead>
                         <tr>
+                            <td>Id</td>
                             <td>Item Number</td>
                             <td>Variant Number</td>
                             <td>Base Price</td>
@@ -22,12 +23,14 @@ class ItemsList extends Component {
                             <td>Quantity</td>
                             <td>From Date Discount</td>
                             <td>To Date Discount</td>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.items.map((item) => {
                             return (
-                                <tr key={item.itemNumber + item.variantNumber}>
+                                <tr key={item.id}>
+                                    <td>{item.id}</td>
                                     <td>{item.itemNumber}</td>
                                     <td>{item.variantNumber}</td>
                                     <td>{item.basePrice}</td>
@@ -35,6 +38,7 @@ class ItemsList extends Component {
                                     <td>{item.qty}</td>
                                     <td>{item.dateFrom.toString()}</td>
                                     <td>{item.dateTo.toString()}</td>
+                                    <button className="btn btn-danger btn-sm">Delete</button>
                                 </tr>)
                         })}
                     </tbody>
