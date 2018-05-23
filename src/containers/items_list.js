@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import itemsList from '../reducers/items_reducer';
+import AddItemForm from '../components/addItemForm';
 
 
 class ItemsList extends Component {
@@ -10,6 +11,7 @@ class ItemsList extends Component {
     render() {
         return (
             <div>
+                <AddItemForm />
                 <table className="table">
                     <thead>
                         <tr>
@@ -31,8 +33,8 @@ class ItemsList extends Component {
                                     <td>{item.basePrice}</td>
                                     <td>{item.discountPrice}</td>
                                     <td>{item.qty}</td>
-                                    <td>{item.fromDate}</td>
-                                    <td>{item.toDate}</td>
+                                    <td>{item.dateFrom.toString()}</td>
+                                    <td>{item.dateTo.toString()}</td>
                                 </tr>)
                         })}
                     </tbody>
