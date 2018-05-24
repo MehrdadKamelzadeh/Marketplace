@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import itemsList from '../reducers/items_reducer';
 import AddItemForm from '../components/addItemForm';
-
+import { bindActionCreators } from 'redux';
+import { deleteCurrentItem, selectCurrentItem } from '../actions/index';
 
 class ItemsList extends Component {
     constructor(props) {
         super(props);
+
     }
+
     render() {
         return (
             <div>
@@ -23,13 +26,15 @@ class ItemsList extends Component {
                             <td>Quantity</td>
                             <td>From Date Discount</td>
                             <td>To Date Discount</td>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.items.map((item) => {
                             return (
-                                <tr key={item.id}>
+                                <tr key={item.id}
+                                    onClick={
+                                        () => this.props.selectCurrentItem( this.props.items.filter(a => a.id == item.id)[0])} >
                                     <td>{item.id}</td>
                                     <td>{item.itemNumber}</td>
                                     <td>{item.variantNumber}</td>
@@ -38,7 +43,10 @@ class ItemsList extends Component {
                                     <td>{item.qty}</td>
                                     <td>{item.dateFrom.toString()}</td>
                                     <td>{item.dateTo.toString()}</td>
-                                    <button className="btn btn-danger btn-sm">Delete</button>
+                                    <td>
+                                        <button className="btn btn-danger btn-sm"
+                                            onClick={() => { this.props.deleteCurrentItem(item.id) }}>Delete</button>
+                                    </td>
                                 </tr>)
                         })}
                     </tbody>
@@ -51,5 +59,8 @@ class ItemsList extends Component {
 function mapStateToProps(state) {
     return { items: state.itemsList }
 }
-export default connect(mapStateToProps)(ItemsList);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ deleteCurrentItem, selectCurrentItem }, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsList);
 

@@ -3,6 +3,7 @@ import DateTimePicker from 'react-datetime-picker';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addNewItemAction } from '../actions/index';
+import  currentItem  from '../reducers/currentItem_reducer';
 
 class AddItemForm extends Component {
     constructor(props) {
@@ -18,6 +19,8 @@ class AddItemForm extends Component {
             dateFrom: new Date(),
             dateTo: new Date()
         };
+
+      
         this.onDateFromChange = this.onDateFromChange.bind(this);
         this.onDateToChange = this.onDateToChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -88,8 +91,12 @@ class AddItemForm extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return { currentItem: state.currentItem }
+}
+
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({ addNewItem: addNewItemAction }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(AddItemForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddItemForm);
